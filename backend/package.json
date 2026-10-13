@@ -1,0 +1,42 @@
+{
+  "name": "siraj-backend",
+  "version": "1.0.0",
+  "description": "SIRAJ - Illuminate Your Heart With Knowledge - Backend API",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node scripts/seed.js",
+    "seed-duas": "node scripts/seed-duas.js",
+    "import-duas": "node scripts/seed-duas.js --import",
+    "test": "node --test",
+    "smoke": "node scripts/smoke.js",
+    "secrets": "node scripts/generate-secrets.js",
+    "vapid": "node scripts/generate-vapid.js",
+    "deploy-check": "node scripts/deploy-check.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.0",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.23.8",
+    "express-rate-limit": "^7.2.0",
+    "node-cache": "^5.1.2",
+    "axios": "^1.7.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "cookie-parser": "^1.4.6",
+    "compression": "^1.7.4",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

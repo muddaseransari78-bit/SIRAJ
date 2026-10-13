@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="night" data-mode="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Applies the saved theme before the page is drawn (no flash). Made by scripts/gen-theme-css.mjs -->
+    <script src="/theme-init.js"></script>
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+    <link rel="preload" as="image" href="/media/siraj-logo.webp" type="image/webp" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b1020" />
+    <meta name="color-scheme" content="dark light" />
+    <meta property="og:title" content="SIRAJ — Illuminate Your Heart With Knowledge" />
+    <meta property="og:description" content="Quran, Hadith, Tafseer, prayer times, Qibla, Tasbeeh and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/media/siraj-logo.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>SIRAJ 🕯️ — Illuminate Your Heart With Knowledge</title>
+    <meta
+      name="description"
+      content="SIRAJ is a premium Islamic digital platform for the Quran, Hadith, Tafseer, prayer times, and more."
+    />
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","name":"SIRAJ","alternateName":"SIRAJ - Illuminate Your Heart With Knowledge","description":"Quran, Hadith, Tafseer, prayer times, Qibla, Tasbeeh and Duas."}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Core fonts only (small). Urdu Nastaliq + Scheherazade are loaded later by src/utils/loadFonts.js -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Shown for a split second until the app starts: same logo and colour as the loading screen, so there is no blank flash -->
+    <style>
+      html { background: #070b12; }
+      html[data-mode="light"] { background: #f5f7fa; }
+      #boot { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: inherit; z-index: 99; }
+      #boot img { width: min(46vw, 200px); height: auto; animation: boot-pulse 1.6s ease-in-out infinite; }
+      html[data-theme="gold"] #boot img, html[data-theme="lightgold"] #boot img { content: url(/media/logo/amber-sm.webp); }
+      html[data-theme="cream"] #boot img { content: url(/media/logo/bronze-sm.webp); }
+      html[data-theme="glass"] #boot img { content: url(/media/logo/cyan-sm.webp); }
+      html[data-theme="lightblue"] #boot img { content: url(/media/logo/blue-sm.webp); }
+      html[data-theme="light"] #boot img { content: url(/media/logo/slate-sm.webp); }
+      @keyframes boot-pulse { 0%, 100% { transform: scale(0.96); opacity: 0.85; } 50% { transform: scale(1.03); opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { #boot img { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <div id="root"><div id="boot"><img src="/media/siraj-logo.webp" width="200" height="200" alt="SIRAJ" /></div></div>
+    <noscript>SIRAJ needs JavaScript to run. Please enable JavaScript in your browser and reload the page.</noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+/* AUTO-GENERATED from src/theme/themes.js by scripts/gen-theme-css.mjs - do not edit by hand. */
+:root,
+html[data-theme="night"] {
+  --noor-bg: 7 11 18;
+  --noor-surface: 14 21 32;
+  --noor-surface2: 20 29 43;
+  --noor-border: 30 40 54;
+  --noor-text: 242 239 233;
+  --noor-textMuted: 154 165 174;
+  --noor-gold: 201 162 75;
+  --noor-goldBright: 232 200 115;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 30 143 94;
+  --noor-onAccent: 7 11 18;
+  --noor-radial: 16 27 42;
+  --noor-danger: 248 113 113;
+  --noor-success: 52 211 153;
+  --noor-warn: 252 211 77;
+  --noor-silhouette: 4 7 13;
+  color-scheme: dark;
+}
+
+html[data-theme="emerald"] {
+  --noor-bg: 4 19 14;
+  --noor-surface: 7 33 26;
+  --noor-surface2: 12 45 35;
+  --noor-border: 23 69 54;
+  --noor-text: 233 247 240;
+  --noor-textMuted: 141 181 163;
+  --noor-gold: 34 166 111;
+  --noor-goldBright: 75 214 156;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 52 211 153;
+  --noor-onAccent: 4 19 14;
+  --noor-radial: 10 43 32;
+  --noor-danger: 248 113 113;
+  --noor-success: 52 211 153;
+  --noor-warn: 252 211 77;
+  --noor-silhouette: 2 10 7;
+  color-scheme: dark;
+}
+
+html[data-theme="gold"] {
+  --noor-bg: 17 12 3;
+  --noor-surface: 27 20 6;
+  --noor-surface2: 38 28 9;
+  --noor-border: 68 52 15;
+  --noor-text: 251 243 220;
+  --noor-textMuted: 194 177 132;
+  --noor-gold: 212 160 23;
+  --noor-goldBright: 255 212 94;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 61 176 122;
+  --noor-onAccent: 17 12 3;
+  --noor-radial: 42 30 8;
+  --noor-danger: 248 113 113;
+  --noor-success: 74 222 128;
+  --noor-warn: 252 211 77;
+  --noor-silhouette: 8 5 0;
+  color-scheme: dark;
+}
+
+html[data-theme="glass"] {
+  --noor-bg: 10 16 36;
+  --noor-surface: 20 28 58;
+  --noor-surface2: 28 39 80;
+  --noor-border: 59 76 133;
+  --noor-text: 244 246 255;
+  --noor-textMuted: 184 194 227;
+  --noor-gold: 103 232 249;
+  --noor-goldBright: 165 243 252;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 94 234 212;
+  --noor-onAccent: 6 16 31;
+  --noor-radial: 30 42 94;
+  --noor-danger: 252 165 165;
+  --noor-success: 94 234 212;
+  --noor-warn: 253 230 138;
+  --noor-silhouette: 6 10 24;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --noor-bg: 245 247 250;
+  --noor-surface: 255 255 255;
+  --noor-surface2: 233 237 243;
+  --noor-border: 197 206 218;
+  --noor-text: 21 26 34;
+  --noor-textMuted: 75 85 99;
+  --noor-gold: 138 101 22;
+  --noor-goldBright: 110 79 12;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 10 106 61;
+  --noor-onAccent: 255 255 255;
+  --noor-radial: 255 255 255;
+  --noor-danger: 185 28 28;
+  --noor-success: 4 106 76;
+  --noor-warn: 146 64 14;
+  --noor-silhouette: 201 209 220;
+  color-scheme: light;
+}
+
+html[data-theme="cream"] {
+  --noor-bg: 246 240 225;
+  --noor-surface: 251 247 236;
+  --noor-surface2: 235 226 201;
+  --noor-border: 208 193 150;
+  --noor-text: 43 42 38;
+  --noor-textMuted: 90 86 74;
+  --noor-gold: 126 90 18;
+  --noor-goldBright: 102 71 16;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 10 106 61;
+  --noor-onAccent: 255 255 255;
+  --noor-radial: 253 250 240;
+  --noor-danger: 185 28 28;
+  --noor-success: 4 106 76;
+  --noor-warn: 146 64 14;
+  --noor-silhouette: 221 209 176;
+  color-scheme: light;
+}
+
+html[data-theme="lightgold"] {
+  --noor-bg: 255 244 209;
+  --noor-surface: 255 250 232;
+  --noor-surface2: 251 231 166;
+  --noor-border: 221 190 92;
+  --noor-text: 51 38 10;
+  --noor-textMuted: 107 85 20;
+  --noor-gold: 133 95 4;
+  --noor-goldBright: 107 78 4;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 10 106 61;
+  --noor-onAccent: 255 255 255;
+  --noor-radial: 255 251 234;
+  --noor-danger: 185 28 28;
+  --noor-success: 4 106 76;
+  --noor-warn: 146 64 14;
+  --noor-silhouette: 235 210 138;
+  color-scheme: light;
+}
+
+html[data-theme="green"] {
+  --noor-bg: 237 247 240;
+  --noor-surface: 248 252 249;
+  --noor-surface2: 217 238 223;
+  --noor-border: 159 203 176;
+  --noor-text: 16 40 26;
+  --noor-textMuted: 62 94 75;
+  --noor-gold: 23 105 63;
+  --noor-goldBright: 15 86 50;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 10 106 61;
+  --noor-onAccent: 255 255 255;
+  --noor-radial: 248 252 249;
+  --noor-danger: 185 28 28;
+  --noor-success: 4 106 76;
+  --noor-warn: 146 64 14;
+  --noor-silhouette: 191 220 201;
+  color-scheme: light;
+}
+
+html[data-theme="lightblue"] {
+  --noor-bg: 234 243 251;
+  --noor-surface: 247 251 255;
+  --noor-surface2: 213 230 246;
+  --noor-border: 158 192 224;
+  --noor-text: 14 34 54;
+  --noor-textMuted: 63 94 124;
+  --noor-gold: 27 98 179;
+  --noor-goldBright: 13 74 148;
+  --noor-emerald: 15 81 50;
+  --noor-emeraldBright: 10 106 61;
+  --noor-onAccent: 255 255 255;
+  --noor-radial: 247 251 255;
+  --noor-danger: 185 28 28;
+  --noor-success: 4 106 76;
+  --noor-warn: 146 64 14;
+  --noor-silhouette: 183 208 232;
+  color-scheme: light;
+}

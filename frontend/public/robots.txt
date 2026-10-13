@@ -1,0 +1,13 @@
+# SIRAJ - search engines may read public pages, not personal/admin pages.
+User-agent: *
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /bookmarks
+Disallow: /progress
+Disallow: /goals
+Disallow: /notifications
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+# After you deploy, add this line with YOUR real address (run: npm run sitemap -- https://your-site.com):
+# Sitemap: https://your-site.com/sitemap.xml

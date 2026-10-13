@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+torch
+transformers>=4.40
+numpy
+# only if you use a LoRA-adapter-only model through ADAPTER_ID (e.g. KheemP/whisper-base-quran-lora):
+# peft

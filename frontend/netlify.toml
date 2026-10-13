@@ -1,0 +1,9 @@
+# Netlify settings (Phase 23). Security headers and the SPA redirect come from public/_headers and public/_redirects.
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # Set VITE_API_BASE_URL in Netlify -> Site settings -> Environment variables (not here).

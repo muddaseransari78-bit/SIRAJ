@@ -1,0 +1,148 @@
+// Dua of the Day (Phase 38). A small built-in list of well known duas from the Quran and the authentic Sunnah, each with its
+// source, so the page works without a network and without a database. The dua changes at midnight (local time) and is the
+// same for everybody on the same day. Pure helpers, no React.
+//
+// Every entry: { id, ar (Arabic), ur (Urdu), en (English), ref (where it comes from) }.
+// To add one: append an object below. Always give a real source in `ref`.
+export const DAILY_DUAS = [
+  { id: "q2-201", ref: "Surah Al-Baqarah 2:201",
+    ar: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+    ur: "اے ہمارے رب! ہمیں دنیا میں بھی بھلائی دے اور آخرت میں بھی بھلائی دے، اور ہمیں آگ کے عذاب سے بچا۔",
+    en: "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire." },
+  { id: "q20-114", ref: "Surah Taha 20:114",
+    ar: "رَبِّ زِدْنِي عِلْمًا",
+    ur: "اے میرے رب! میرے علم میں اضافہ فرما۔",
+    en: "My Lord, increase me in knowledge." },
+  { id: "q20-25", ref: "Surah Taha 20:25-28",
+    ar: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي يَفْقَهُوا قَوْلِي",
+    ur: "اے میرے رب! میرا سینہ کھول دے، میرا کام آسان کر دے، اور میری زبان کی گرہ کھول دے تاکہ لوگ میری بات سمجھ سکیں۔",
+    en: "My Lord, expand for me my chest, ease my task for me, and untie the knot from my tongue so they may understand my speech." },
+  { id: "q2-286", ref: "Surah Al-Baqarah 2:286",
+    ar: "رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا",
+    ur: "اے ہمارے رب! اگر ہم بھول جائیں یا غلطی کر بیٹھیں تو ہمیں نہ پکڑنا۔",
+    en: "Our Lord, do not hold us accountable if we forget or make a mistake." },
+  { id: "q7-23", ref: "Surah Al-A'raf 7:23",
+    ar: "رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+    ur: "اے ہمارے رب! ہم نے اپنی جانوں پر ظلم کیا، اور اگر تو ہمیں معاف نہ کرے اور ہم پر رحم نہ فرمائے تو ہم ضرور نقصان اٹھانے والوں میں سے ہوں گے۔",
+    en: "Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy on us, we will surely be among the losers." },
+  { id: "q3-8", ref: "Surah Aal-e-Imran 3:8",
+    ar: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ",
+    ur: "اے ہمارے رب! ہدایت دینے کے بعد ہمارے دلوں کو ٹیڑھا نہ کر، اور ہمیں اپنی طرف سے رحمت عطا فرما۔ بے شک تو ہی بہت عطا کرنے والا ہے۔",
+    en: "Our Lord, do not let our hearts deviate after You have guided us, and grant us mercy from Yourself. Indeed, You are the Bestower." },
+  { id: "q14-40", ref: "Surah Ibrahim 14:40",
+    ar: "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي ۚ رَبَّنَا وَتَقَبَّلْ دُعَاءِ",
+    ur: "اے میرے رب! مجھے نماز قائم کرنے والا بنا، اور میری اولاد میں سے بھی۔ اے ہمارے رب! میری دعا قبول فرما۔",
+    en: "My Lord, make me an establisher of prayer, and from my descendants. Our Lord, accept my supplication." },
+  { id: "q25-74", ref: "Surah Al-Furqan 25:74",
+    ar: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+    ur: "اے ہمارے رب! ہمیں ہماری بیویوں اور اولاد سے آنکھوں کی ٹھنڈک عطا فرما، اور ہمیں متقیوں کا پیشوا بنا۔",
+    en: "Our Lord, grant us from among our spouses and offspring comfort to our eyes, and make us leaders for the righteous." },
+  { id: "q66-8", ref: "Surah At-Tahrim 66:8",
+    ar: "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا ۖ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+    ur: "اے ہمارے رب! ہمارے لیے ہمارا نور مکمل فرما دے اور ہمیں بخش دے۔ بے شک تو ہر چیز پر قادر ہے۔",
+    en: "Our Lord, perfect our light for us and forgive us. Indeed, You are over all things competent." },
+  { id: "q17-24", ref: "Surah Al-Isra 17:24",
+    ar: "رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+    ur: "اے میرے رب! ان دونوں (والدین) پر رحم فرما جیسا کہ انہوں نے بچپن میں مجھے پالا۔",
+    en: "My Lord, have mercy upon them as they brought me up when I was small." },
+  { id: "q14-41", ref: "Surah Ibrahim 14:41",
+    ar: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",
+    ur: "اے ہمارے رب! مجھے، میرے والدین کو اور سب مومنوں کو اس دن بخش دے جس دن حساب قائم ہوگا۔",
+    en: "Our Lord, forgive me and my parents and the believers on the Day the account is established." },
+  { id: "q3-173", ref: "Surah Aal-e-Imran 3:173",
+    ar: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+    ur: "ہمیں اللہ کافی ہے اور وہ بہترین کارساز ہے۔",
+    en: "Allah is sufficient for us, and He is the best Disposer of affairs." },
+  { id: "q21-87", ref: "Surah Al-Anbiya 21:87",
+    ar: "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+    ur: "تیرے سوا کوئی معبود نہیں، تو پاک ہے، بے شک میں ظالموں میں سے تھا۔",
+    en: "There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers." },
+  { id: "q28-24", ref: "Surah Al-Qasas 28:24",
+    ar: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
+    ur: "اے میرے رب! جو بھلائی بھی تو میری طرف اتارے، میں اس کا محتاج ہوں۔",
+    en: "My Lord, indeed I am, for whatever good You send down to me, in need." },
+  { id: "q2-250", ref: "Surah Al-Baqarah 2:250",
+    ar: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا",
+    ur: "اے ہمارے رب! ہم پر صبر انڈیل دے اور ہمارے قدم جما دے۔",
+    en: "Our Lord, pour upon us patience and plant firmly our feet." },
+  { id: "q2-127", ref: "Surah Al-Baqarah 2:127",
+    ar: "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ",
+    ur: "اے ہمارے رب! ہم سے (یہ عمل) قبول فرما، بے شک تو خوب سننے والا، جاننے والا ہے۔",
+    en: "Our Lord, accept this from us. Indeed, You are the Hearing, the Knowing." },
+  { id: "q21-83", ref: "Surah Al-Anbiya 21:83",
+    ar: "أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ",
+    ur: "بے شک مجھے تکلیف پہنچی ہے اور تو سب رحم کرنے والوں سے زیادہ رحم کرنے والا ہے۔",
+    en: "Indeed, adversity has touched me, and You are the Most Merciful of the merciful." },
+  { id: "q18-10", ref: "Surah Al-Kahf 18:10",
+    ar: "رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",
+    ur: "اے ہمارے رب! ہمیں اپنی طرف سے رحمت عطا فرما اور ہمارے معاملے میں ہمارے لیے ہدایت کا سامان مہیا فرما۔",
+    en: "Our Lord, grant us from Yourself mercy and prepare for us right guidance in our affair." },
+  { id: "q37-100", ref: "Surah As-Saffat 37:100",
+    ar: "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ",
+    ur: "اے میرے رب! مجھے نیک (اولاد) عطا فرما۔",
+    en: "My Lord, grant me [a child] from among the righteous." },
+  { id: "q23-97", ref: "Surah Al-Mu'minun 23:97-98",
+    ar: "رَّبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحْضُرُونِ",
+    ur: "اے میرے رب! میں شیطانوں کے وسوسوں سے تیری پناہ مانگتا ہوں، اور اے میرے رب! اس بات سے بھی تیری پناہ مانگتا ہوں کہ وہ میرے پاس آئیں۔",
+    en: "My Lord, I seek refuge in You from the incitements of the devils, and I seek refuge in You, my Lord, lest they be present with me." },
+  { id: "h-morning", ref: "Sunan at-Tirmidhi 3391 (morning dua)",
+    ar: "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+    ur: "اے اللہ! تیرے ہی نام سے ہم نے صبح کی اور تیرے ہی نام سے شام کی، تیرے ہی نام سے ہم جیتے ہیں اور تیرے ہی نام سے مرتے ہیں، اور تیری ہی طرف اٹھ کر جانا ہے۔",
+    en: "O Allah, by You we enter the morning and by You we enter the evening; by You we live and by You we die, and to You is the resurrection." },
+  { id: "h-sayyid", ref: "Sahih al-Bukhari 6306 (Sayyid al-Istighfar)",
+    ar: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+    ur: "اے اللہ! تو میرا رب ہے، تیرے سوا کوئی معبود نہیں، تو نے مجھے پیدا کیا اور میں تیرا بندہ ہوں، اور میں اپنی استطاعت کے مطابق تیرے عہد اور وعدے پر قائم ہوں۔ میں اپنے کیے کے شر سے تیری پناہ مانگتا ہوں۔ میں تیری اس نعمت کا اعتراف کرتا ہوں جو مجھ پر ہے اور اپنے گناہ کا اعتراف کرتا ہوں، پس مجھے بخش دے، کیونکہ تیرے سوا کوئی گناہوں کو نہیں بخشتا۔",
+    en: "O Allah, You are my Lord; there is no deity except You. You created me and I am Your servant, and I keep Your covenant and promise as far as I am able. I seek refuge in You from the evil I have done. I acknowledge Your favour upon me and I acknowledge my sin, so forgive me, for none forgives sins except You." },
+  { id: "h-bismillah", ref: "Sunan Abi Dawud 5088, Sunan at-Tirmidhi 3388",
+    ar: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+    ur: "اللہ کے نام سے، جس کے نام کے ساتھ زمین و آسمان میں کوئی چیز نقصان نہیں پہنچا سکتی، اور وہ خوب سننے والا، جاننے والا ہے۔",
+    en: "In the name of Allah, with whose name nothing on earth or in heaven can cause harm, and He is the All-Hearing, the All-Knowing." },
+  { id: "h-afiyah", ref: "Sunan Ibn Majah 3871",
+    ar: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+    ur: "اے اللہ! میں تجھ سے دنیا اور آخرت میں معافی اور عافیت مانگتا ہوں۔",
+    en: "O Allah, I ask You for pardon and well-being in this world and the Hereafter." },
+  { id: "h-afuw", ref: "Sunan at-Tirmidhi 3513",
+    ar: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+    ur: "اے اللہ! بے شک تو معاف کرنے والا ہے، معافی کو پسند کرتا ہے، پس مجھے معاف فرما دے۔",
+    en: "O Allah, You are Forgiving and You love forgiveness, so forgive me." },
+  { id: "h-qulub", ref: "Sunan at-Tirmidhi 2140",
+    ar: "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+    ur: "اے دلوں کے پھیرنے والے! میرے دل کو اپنے دین پر ثابت قدم رکھ۔",
+    en: "O Turner of hearts, keep my heart firm upon Your religion." },
+  { id: "h-hamm", ref: "Sahih al-Bukhari 6369",
+    ar: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْبُخْلِ وَالْجُبْنِ وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ",
+    ur: "اے اللہ! میں فکر اور غم سے، کمزوری اور سستی سے، بخل اور بزدلی سے، قرض کے بوجھ سے اور لوگوں کے غلبے سے تیری پناہ مانگتا ہوں۔",
+    en: "O Allah, I seek refuge in You from worry and grief, from weakness and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by men." },
+  { id: "h-dhikr", ref: "Sunan Abi Dawud 1522",
+    ar: "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+    ur: "اے اللہ! اپنے ذکر، اپنے شکر اور اچھی طرح اپنی عبادت کرنے میں میری مدد فرما۔",
+    en: "O Allah, help me to remember You, to thank You, and to worship You well." },
+  { id: "h-ilm", ref: "Sunan Ibn Majah 925 (after Fajr)",
+    ar: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا",
+    ur: "اے اللہ! میں تجھ سے نفع بخش علم، پاکیزہ رزق اور مقبول عمل مانگتا ہوں۔",
+    en: "O Allah, I ask You for beneficial knowledge, good provision and accepted deeds." },
+  { id: "h-halal", ref: "Sunan at-Tirmidhi 3563",
+    ar: "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ",
+    ur: "اے اللہ! اپنے حلال کے ذریعے مجھے حرام سے کافی کر دے، اور اپنے فضل سے مجھے اپنے سوا سب سے بے نیاز کر دے۔",
+    en: "O Allah, make what is lawful enough for me so that I need not what is forbidden, and by Your grace make me independent of everyone besides You." },
+];
+
+const DAY_MS = 86400000;
+
+/** Whole days since 1970 of the calendar day the person is in (their own time zone, not UTC). */
+export function dayNumber(date = new Date()) {
+  return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / DAY_MS);
+}
+
+/** The dua of that day. `shift` moves forward / back through the list ("another dua"). Never fails, never returns undefined. */
+export function duaForDate(date = new Date(), shift = 0) {
+  const n = DAILY_DUAS.length;
+  const index = (((dayNumber(date) + shift) % n) + n) % n;
+  return DAILY_DUAS[index];
+}
+
+/** Text to copy / share: Arabic, translation and source. */
+export function duaShareText(dua, lang) {
+  const meaning = lang === "ur" ? dua.ur : dua.en;
+  return `${dua.ar}\n\n${meaning}\n\n— ${dua.ref}\nSIRAJ`;
+}

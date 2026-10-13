@@ -1,0 +1,57 @@
+# Run the WHOLE of SIRAJ (database + backend + frontend) with one command (Phase 23):
+#   1. copy .env.docker.example .env.docker  and fill the two JWT secrets (npm run secrets in backend)
+#   2. docker compose --env-file .env.docker up --build
+#   3. open http://localhost:8080   (API: http://localhost:5000/api/health)
+# First admin:  docker compose --env-file .env.docker exec backend node scripts/seed.js
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    # not published to your PC on purpose: only the backend container can reach it
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGO_URI: mongodb://mongo:27017/siraj
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?run npm run secrets in backend and fill .env.docker}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?run npm run secrets in backend and fill .env.docker}
+      CLIENT_URL: http://localhost:8080
+      TRUST_PROXY: 0
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@siraj.local}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-}
+      # Phase 31: background prayer reminders (optional, make with: cd backend ; npm run vapid)
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:admin@siraj.local}
+      # Phase 38: Google / Apple sign-in (optional)
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-}
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:5000/api
+        VITE_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+        VITE_APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-}
+        VITE_APPLE_REDIRECT_URI: ${APPLE_REDIRECT_URI:-}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      # the page may talk to this http address (the default policy only allows https)
+      API_ORIGIN: http://localhost:5000
+    ports:
+      - "8080:80"
+
+volumes:
+  mongo-data:
