@@ -1,3 +1,4 @@
+require("dns").setServers(["8.8.8.8"]);
 require("dotenv").config();
 
 // Friendly start-up check of backend/.env (see utils/envCheck.js).
