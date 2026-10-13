@@ -6,8 +6,7 @@ Urdu / Arabic / English, 9 themes (the logo changes colour with the theme).
 
 **Stack:** React + Vite + Tailwind + Three.js (frontend) - Node/Express + MongoDB (backend).
 
-## Deploy
-Open **`DEPLOY-NOW.md`** (short steps) or `DEPLOYMENT.md` (full details).
+See **`DEPLOYMENT.md`** for the full step-by-step guide.
 
 ## Run on your PC (Windows PowerShell)
 ```powershell
