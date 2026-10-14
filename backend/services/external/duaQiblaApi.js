@@ -3,7 +3,8 @@ const cache = require("../../utils/cache");
 const { CACHE_TTL_SECONDS } = require("../../config/constants");
 
 const BASE_URL = process.env.ISLAMIC_API_BASE_URL || "https://api.islamic.app";
-const client = axios.create({ baseURL: BASE_URL, timeout: 10000 });
+const { makeIslamicClient } = require("../../utils/islamicClient");
+const client = makeIslamicClient(10000);
 
 const unwrap = (r) => r.data.data;
 

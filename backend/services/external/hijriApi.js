@@ -7,7 +7,10 @@ const client = axios.create({
   baseURL: process.env.PRAYER_API_BASE_URL || "https://api.aladhan.com/v1",
   timeout: 10000,
 });
-
+async function gregorianMonthCalendar(month, year) {
+  const res = await client.get(`/gToHCalendar/${Number(month)}/${Number(year)}`);
+  return res.data.data;
+}
 const DAY = 60 * 60 * 24;
 /** Gregorian "DD-MM-YYYY" -> Hijri (calculated, may differ by a day from moon sighting). */
 async function gregorianToHijri(dmy) {
@@ -61,4 +64,4 @@ async function getRamadanTimetable({ hijriYear, latitude, longitude, city, count
   return out;
 }
 
-module.exports = { gregorianToHijri, hijriToGregorian, getRamadanTimetable };
+module.exports = { gregorianToHijri, hijriToGregorian, getRamadanTimetable,gregorianMonthCalendar };

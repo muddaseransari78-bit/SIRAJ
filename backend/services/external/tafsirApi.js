@@ -3,7 +3,8 @@ const cache = require("../../utils/cache");
 const { CACHE_TTL_SECONDS } = require("../../config/constants");
 
 const BASE_URL = process.env.ISLAMIC_API_BASE_URL || "https://api.islamic.app";
-const client = axios.create({ baseURL: BASE_URL, timeout: 15000 });
+const { makeIslamicClient } = require("../../utils/islamicClient");
+const client = makeIslamicClient(10000);
 const unwrap = (r) => r.data.data;
 
 // Always-available default (documented example slug of the source API).
@@ -49,10 +50,16 @@ async function getTafsirForVerse(surah, ayah, sourceSlug) {
   const cached = cache.get(key);
   if (cached) return cached;
 
-  const response = await client.get(`/v1/verses/by_key/${surah}:${ayah}`, {
+let response;
+try {
+  response = await client.get(`/v1/verses/by_key/${surah}:${ayah}`, {
     params: { translations: "en-sahih-international", tafsirs: sourceSlug },
   });
-  const verse = unwrap(response).verse;
+} catch (e) {
+  console.warn("[SIRAJ] islamic.app tafsir failed, using alquran.cloud:", e.response ? e.response.status : e.message);
+  return fallbackFromAlQuranCloud(surah, ayah, key);
+}
+const verse = unwrap(response).verse;
 
   const result = {
     verseKey: verse.verse_key || `${surah}:${ayah}`,
@@ -71,5 +78,17 @@ async function getTafsirForVerse(surah, ayah, sourceSlug) {
   cache.set(key, result, CACHE_TTL_SECONDS.QURAN_STATIC);
   return result;
 }
-
+async function fallbackFromAlQuranCloud(surah, ayah, key) {
+  const base = process.env.QURAN_API_BASE_URL || "https://api.alquran.cloud/v1";
+  const res = await axios.get(`${base}/ayah/${surah}:${ayah}/editions/quran-uthmani,en.sahih,ar.muyassar`, { timeout: 12000 });
+  const [ar, en, tf] = res.data.data;
+  const result = {
+    verseKey: `${surah}:${ayah}`,
+    arabic: ar.text,
+    translation: { text: en.text, source: "Saheeh International" },
+    tafsirs: [{ slug: "ar-tafsir-muyassar", source: "Tafsir al-Muyassar", language: "Arabic", text: tf.text }],
+  };
+  cache.set(key, result, 60 * 60 * 6);
+  return result;
+}
 module.exports = { getTafsirSources, getTafsirForVerse };

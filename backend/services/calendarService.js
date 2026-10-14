@@ -3,10 +3,8 @@ const cache = require("../utils/cache");
 const hijriApi = require("./external/hijriApi");
 const { EVENTS, UPCOMING_EVENTS, HIJRI_MONTHS, pickUpcoming } = require("../utils/hijriEvents");
 
-const client = axios.create({
-  baseURL: process.env.ISLAMIC_API_BASE_URL || "https://api.islamic.app",
-  timeout: 10000,
-});
+const { makeIslamicClient } = require("../utils/islamicClient");
+const client = makeIslamicClient(10000);
 
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -19,8 +17,15 @@ async function getMonth(month, year) {
   const cached = cache.get(key);
   if (cached) return cached;
 
-  const response = await client.get(`/v1/hijri/calendar/${month}/${year}`);
-  const days = response.data.data.map((d) => {
+  let rows;
+  try {
+    rows = (await client.get(`/v1/hijri/calendar/${month}/${year}`)).data.data;
+  } catch (e) {
+    console.warn("[SIRAJ] islamic.app calendar failed, using AlAdhan:", e.response ? e.response.status : e.message);
+    rows = await hijriApi.gregorianMonthCalendar(month, year);
+  }
+
+  const days = rows.map((d) => {
     const hm = d.hijri?.month?.number;
     const hd = Number(d.hijri?.day);
     const events = EVENTS.filter((e) => e.month === hm && e.day === hd);

@@ -1,6 +1,8 @@
 require("dns").setServers(["8.8.8.8"]);
 require("dotenv").config();
-
+const axiosLib = require("axios");
+axiosLib.defaults.headers.common["User-Agent"] = process.env.OUTBOUND_USER_AGENT || "SIRAJ-Islamic-App/1.0";
+axiosLib.defaults.headers.common["Accept"] = "application/json";
 // Friendly start-up check of backend/.env (see utils/envCheck.js).
 // Production: any error stops the server. Development: problems are only warnings (except missing values).
 const { checkEnv } = require("./utils/envCheck");

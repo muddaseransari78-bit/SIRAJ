@@ -75,5 +75,26 @@ router.get("/health/ready", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
-
+router.get("/health/upstream", async (req, res) => {
+  const axios = require("axios");
+  const islamic = process.env.ISLAMIC_API_BASE_URL || "https://api.islamic.app";
+  const headers = process.env.ISLAMIC_API_KEY ? { "X-Api-Key": process.env.ISLAMIC_API_KEY } : {};
+  const checks = {
+    islamicApp_hadith: `${islamic}/v1/hadith/collections?type=hadith`,
+    islamicApp_duas: `${islamic}/v1/dhikr/travel`,
+    islamicApp_calendar: `${islamic}/v1/hijri/calendar/10/2026`,
+    aladhan: "https://api.aladhan.com/v1/gToHCalendar/10/2026",
+    alquranCloud: "https://api.alquran.cloud/v1/surah/1",
+  };
+  const out = {};
+  await Promise.all(Object.entries(checks).map(async ([name, url]) => {
+    try {
+      const r = await axios.get(url, { timeout: 10000, headers });
+      out[name] = { ok: true, status: r.status };
+    } catch (e) {
+      out[name] = { ok: false, status: e.response ? e.response.status : null, code: e.code || null, message: String(e.message).slice(0, 120) };
+    }
+  }));
+  res.json({ success: true, usingApiKey: !!process.env.ISLAMIC_API_KEY, checks: out });
+});
 module.exports = router;
