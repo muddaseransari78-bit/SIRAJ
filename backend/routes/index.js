@@ -97,4 +97,31 @@ router.get("/health/upstream", async (req, res) => {
   }));
   res.json({ success: true, usingApiKey: !!process.env.ISLAMIC_API_KEY, checks: out });
 });
+router.get("/health/hadith-test", async (req, res) => {
+  const axios = require("axios");
+  const url = (process.env.ISLAMIC_API_BASE_URL || "https://api.islamic.app") + "/v1/hadith/collections";
+  const browserUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+  const key = process.env.ISLAMIC_API_KEY ? { "X-Api-Key": process.env.ISLAMIC_API_KEY } : {};
+  const variants = {
+    plain: { ...key },
+    browserUA: { ...key, "User-Agent": browserUA, "Accept-Language": "en-US,en;q=0.9" },
+  };
+  const out = {};
+  for (const [name, headers] of Object.entries(variants)) {
+    try {
+      const r = await axios.get(url, { params: { type: "hadith" }, headers, timeout: 10000 });
+      out[name] = { ok: true, status: r.status };
+    } catch (e) {
+      const d = e.response && e.response.data;
+      out[name] = {
+        ok: false,
+        status: e.response ? e.response.status : null,
+        server: e.response ? e.response.headers["server"] : null,
+        cfMitigated: e.response ? e.response.headers["cf-mitigated"] || null : null,
+        body: String(typeof d === "string" ? d : JSON.stringify(d || "")).slice(0, 400),
+      };
+    }
+  }
+  res.json({ usingApiKey: !!process.env.ISLAMIC_API_KEY, out });
+});
 module.exports = router;
