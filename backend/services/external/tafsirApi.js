@@ -21,7 +21,7 @@ async function getTafsirSources() {
   const cached = cache.get(cacheKey);
   if (cached) return cached;
 
-  let sources = DEFAULT_SOURCES;
+  let sources = null;
   try {
     const data = unwrap(await client.get("/v1/resources/tafsirs"));
     const list = Array.isArray(data) ? data : data?.tafsirs || data?.resources || [];
@@ -34,8 +34,23 @@ async function getTafsirSources() {
       .filter((t) => t.slug);
     if (mapped.length) sources = mapped;
   } catch (e) {
-    // fall back to defaults
+    // islamic.app not answering: try the Quran service below
   }
+
+  if (!sources) {
+    try {
+      const base = process.env.QURAN_API_BASE_URL || "https://api.alquran.cloud/v1";
+      const res = await axios.get(`${base}/edition/type/tafsir`, { timeout: 12000 });
+      const mapped = (res.data.data || [])
+        .map((e) => ({ slug: e.identifier, name: e.name || e.englishName, language: e.language }))
+        .filter((t) => t.slug);
+      if (mapped.length) sources = mapped;
+    } catch (e) {
+      // fall through
+    }
+  }
+
+  if (!sources) return DEFAULT_SOURCES; // not cached, so the next visit tries again
 
   cache.set(cacheKey, sources, CACHE_TTL_SECONDS.QURAN_STATIC);
   return sources;
@@ -57,7 +72,7 @@ try {
   });
 } catch (e) {
   console.warn("[SIRAJ] islamic.app tafsir failed, using alquran.cloud:", e.response ? e.response.status : e.message);
-  return fallbackFromAlQuranCloud(surah, ayah, key);
+ return fallbackFromAlQuranCloud(surah, ayah, key, sourceSlug);
 }
 const verse = unwrap(response).verse;
 
@@ -78,15 +93,30 @@ const verse = unwrap(response).verse;
   cache.set(key, result, CACHE_TTL_SECONDS.QURAN_STATIC);
   return result;
 }
-async function fallbackFromAlQuranCloud(surah, ayah, key) {
+async function fallbackFromAlQuranCloud(surah, ayah, key, sourceSlug) {
   const base = process.env.QURAN_API_BASE_URL || "https://api.alquran.cloud/v1";
-  const res = await axios.get(`${base}/ayah/${surah}:${ayah}/editions/quran-uthmani,en.sahih,ar.muyassar`, { timeout: 12000 });
-  const [ar, en, tf] = res.data.data;
+  const wanted = String(sourceSlug || "").includes(".") ? sourceSlug : "ar.muyassar";
+  async function load(edition) {
+    const res = await axios.get(`${base}/ayah/${surah}:${ayah}/editions/quran-uthmani,en.sahih,${edition}`, { timeout: 12000 });
+    return res.data.data;
+  }
+  let rows;
+  try {
+    rows = await load(wanted);
+  } catch (e) {
+    rows = await load("ar.muyassar");
+  }
+  const [ar, en, tf] = rows;
   const result = {
     verseKey: `${surah}:${ayah}`,
     arabic: ar.text,
     translation: { text: en.text, source: "Saheeh International" },
-    tafsirs: [{ slug: "ar-tafsir-muyassar", source: "Tafsir al-Muyassar", language: "Arabic", text: tf.text }],
+    tafsirs: [{
+      slug: tf.edition?.identifier || wanted,
+      source: tf.edition?.name || tf.edition?.englishName || "Tafsir",
+      language: tf.edition?.language || "",
+      text: tf.text,
+    }],
   };
   cache.set(key, result, 60 * 60 * 6);
   return result;
