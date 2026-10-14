@@ -6,7 +6,7 @@
     },
     {
       "source": "/api/:path*",
-      "destination": "https://siraj-zjxu.onrender.com/api/:path*"
+     "destination": "https://siraj-zjxu.onrender.com/api/:path*"
     }
   ],
   "headers": [
