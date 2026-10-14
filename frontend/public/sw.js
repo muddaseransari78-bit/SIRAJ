@@ -6,7 +6,7 @@
    - Phase 31: a "push" message from the server (prayer / Jamaat reminder) shows a notification even when
      SIRAJ is closed or minimized.
    Change VERSION when you want old caches to be removed. */
-const VERSION = "siraj-v41";
+const VERSION = "siraj-v40";
 const CORE = ["/offline.html", "/manifest.webmanifest", "/icons/icon-192.png"];
 
 self.addEventListener("install", (event) => {
